@@ -13,5 +13,5 @@ A small subset of the Lake Winnipeg telemetry data is collected. The purpose is 
 ## 1. Data Summaries:
 > fish_df <- read.csv(file = 'Telemetry Subset.csv')
 
-### Number of detections per FishID
+#### Number of detections per FishID
 > fish_df %>% group_by(FishID) %>% tally()
