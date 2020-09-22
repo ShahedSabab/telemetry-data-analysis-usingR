@@ -98,7 +98,7 @@ combined_table_sorted
 # ... with 20 more rows
 ```
 ## 2. Mean Daily Position:
-#### A. Mean daily position for each fish:
+#### A. Mean daily position for each fish
 > fish_mean_pos <- fish_df %>% group_by(FishID,day(ymd_hms(Date))) %>% summarize(Mean_Lat = mean(ReceiverLat, na.rm=TRUE), Mean_Long = mean(ReceiverLong, na.rm=TRUE))
 ```
 # A tibble: 293 x 4
@@ -117,9 +117,43 @@ combined_table_sorted
 10 BMBF033                   28     49.9     -97.1
 # ... with 283 more rows
 ```
-#### B. Plot mean dailty positions for FishID-Wall-135:
+#### B. Plot mean dailty positions for FishID-Wall-135
 > selected_data <- subset(fish_mean_pos, FishID == "Wall-135")
 
 > ggplot(selected_data, aes(x = Mean_Lat, y = Mean_Long)) + geom_point()
 
 ![](daily_position.png?raw=true)
+
+## 3. Fish Behaviour
+#### A. Investigate the distribution for each species analyzing the latitude
+```
+fish_df %>% 
+  mutate(Waterbody = case_when(
+    ReceiverLat < 50.4 ~ "Red River",
+    ReceiverLat >= 50.4 & ReceiverLat < 51.2 ~ "South Basin",
+    ReceiverLat >= 51.2 & ReceiverLat < 51.75 ~ "Narrows",
+    ReceiverLat >= 51.75 ~ "North Basin"
+  )) %>% 
+  group_by(Species, Waterbody) %>% 
+  summarise(dtcs = length(FishID),
+            stations = length(unique(Name)))
+```
+```
+# A tibble: 13 x 4
+# Groups:   Species [5]
+   Species          Waterbody    dtcs stations
+   <fct>            <chr>       <int>    <int>
+ 1 Bigmouth Buffalo Red River    2604        7
+ 2 Channel Catfish  Red River    1974        1
+ 3 Channel Catfish  South Basin  1143        3
+ 4 Common Carp      Narrows      1498        7
+ 5 Common Carp      Red River     910        4
+ 6 Common Carp      South Basin   998       27
+ 7 Drum             Narrows      1094        6
+ 8 Drum             North Basin   626        1
+ 9 Drum             Red River     181        2
+10 Drum             South Basin  1602       12
+11 Walleye          Narrows       317        8
+12 Walleye          North Basin   881        7
+13 Walleye          South Basin  1976       31
+```
