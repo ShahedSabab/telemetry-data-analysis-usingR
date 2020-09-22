@@ -17,7 +17,7 @@ A small subset of the Lake Winnipeg telemetry data is collected. The purpose is 
 
 #### Number of detections per FishID
 > fish_df %>% group_by(FishID) %>% tally()
-'''
+```
 FishID       n
 <fct>    <int>
 1 BMBF001    854
@@ -35,4 +35,4 @@ FishID       n
 13 Wall-119  1198
 14 Wall-135  1320
 15 Wall-219   656
-'''
+```
