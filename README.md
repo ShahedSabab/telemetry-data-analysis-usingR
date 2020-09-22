@@ -37,7 +37,7 @@ A small subset of the Lake Winnipeg telemetry data is collected. The purpose is 
 14 Wall-135  1320
 15 Wall-219   656
 ```
-#### B.Number of detections per Species
+#### B. Number of detections per Species
 > fish_df %>% group_by(Species) %>% tally()
 ```
 # A tibble: 5 x 2
@@ -49,7 +49,7 @@ A small subset of the Lake Winnipeg telemetry data is collected. The purpose is 
 4 Drum              3503
 5 Walleye           3174
 ```
-#### C.Number of fish per Species
+#### C. Number of fish per Species
 > fish_df %>% group_by(Species) %>% distinct(FishID, .keep_all = TRUE) %>% summarise(n_fish = n()) 
 ```
 # A tibble: 5 x 2
@@ -61,7 +61,7 @@ A small subset of the Lake Winnipeg telemetry data is collected. The purpose is 
 4 Drum                  3
 5 Walleye               3
 ```
-#### D.For each fish, total number of positions during daytime (>6am and <10pm) and night time (>=10pm and <=6am) period 
+#### D. For each fish, total number of positions during daytime (>6am and <10pm) and night time (>=10pm and <=6am) period 
 ```
 day <- subset(fish_df, hour(ymd_hms(fish_df$Date)) >= 6 & hour(ymd_hms(fish_df$Date)) < 22)
 
@@ -97,3 +97,27 @@ combined_table_sorted
 10 Carp-021   136 Night     
 # ... with 20 more rows
 ```
+## 2. Mean Daily Position:
+#### A. Mean daily position for each fish:
+> fish_mean_pos <- fish_df %>% group_by(FishID,day(ymd_hms(Date))) %>% summarize(Mean_Lat = mean(ReceiverLat, na.rm=TRUE), Mean_Long = mean(ReceiverLong, na.rm=TRUE))
+```
+# A tibble: 293 x 4
+# Groups:   FishID [15]
+   FishID  `day(ymd_hms(Date))` Mean_Lat Mean_Long
+   <fct>                  <int>    <dbl>     <dbl>
+ 1 BMBF001                    3     49.7     -97.1
+ 2 BMBF001                    4     49.7     -97.1
+ 3 BMBF001                    7     49.8     -97.1
+ 4 BMBF001                    8     49.8     -97.1
+ 5 BMBF001                   10     49.8     -97.1
+ 6 BMBF001                   11     49.8     -97.1
+ 7 BMBF001                   26     49.8     -97.1
+ 8 BMBF001                   27     49.8     -97.1
+ 9 BMBF033                   20     49.9     -97.1
+10 BMBF033                   28     49.9     -97.1
+# ... with 283 more rows
+```
+#### B. Plot mean dailty positions for FishID-Wall-135:
+> selected_data <- subset(fish_mean_pos, FishID == "Wall-135")
+> ggplot(selected_data, aes(x = Mean_Lat, y = Mean_Long)) + geom_point()
+![](daily_positions.png?raw=true)
