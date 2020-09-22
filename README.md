@@ -1,5 +1,5 @@
 # telemetry-data-analysis-usingR
-A small subset of the Lake Winnipeg telemetry data is collected. The purpose is to analyze this data to find out interesting insights about the fish inhabitatns. A few highlights are as follows: the distribution of different species, the certain area where specific species can be found, and the time period of their perambulation. The data has the following attributes:
+A small subset of the Lake Winnipeg telemetry data is collected. The purpose is to analyze this data to find out interesting insights about the fish inhabitants. A few highlights are as follows: the distribution of different species, the certain area where specific species can be found, and the time period of their perambulation. The data has the following attributes:
 
 1. Date - A timestamp for when a receiver (station) detects a transmitter detection
 2. Name - A unique station name for each receiver in the study
