@@ -170,3 +170,6 @@ Analyzing the distribution of each species, the following insights can be found:
 4. Drum can be found in Narrows, North Basin, Red River, and South Basin, while more in South Basin.
 5. Walleye can be found in Narrows, North Basin, and South Basin while more in South Basin 
 South Basin can be a hot spot for Drum and Walleye. In Red River Channel Catfish and Bigmouth Buffalo species are frequently detected. There is a higher chance of getting Common Carp in the Narrows.
+
+# How to run:
+Please check the task.R file.
