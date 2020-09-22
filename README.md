@@ -121,4 +121,5 @@ combined_table_sorted
 > selected_data <- subset(fish_mean_pos, FishID == "Wall-135")
 
 > ggplot(selected_data, aes(x = Mean_Lat, y = Mean_Long)) + geom_point()
+
 ![](daily_position.png?raw=true)
