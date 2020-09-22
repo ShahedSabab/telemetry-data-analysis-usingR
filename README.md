@@ -60,5 +60,40 @@ A small subset of the Lake Winnipeg telemetry data is collected. The purpose is 
 3 Common Carp           3
 4 Drum                  3
 5 Walleye               3
+```
+#### D.For each fish, total number of positions during daytime (>6am and <10pm) and night time (>=10pm and <=6am) period 
+```
+day <- subset(fish_df, hour(ymd_hms(fish_df$Date)) >= 6 & hour(ymd_hms(fish_df$Date)) < 22)
 
+night <- subset(fish_df, (hour(ymd_hms(fish_df$Date)) >= 0 & hour(ymd_hms(fish_df$Date)) <= 5) | (hour(ymd_hms(fish_df$Date)) >= 22 & hour(ymd_hms(fish_df$Date)) < 24))
 
+# A. Create a table that shows the number of detections per FishID.
+d_table <- day %>% group_by(FishID) %>% tally()
+d_table$DielPeriod <- "Day"
+
+n_table <- night %>% group_by(FishID) %>% tally()
+n_table$DielPeriod <- "Night"
+
+# Add datasets vertically
+combined_table <- rbind(d_table, n_table)
+
+# Sort by FishID
+combined_table_sorted <- combined_table[order(combined_table$FishID),]
+combined_table_sorted
+```
+```
+# A tibble: 30 x 3
+  FishID       n DielPeriod
+  <fct>    <int> <chr>     
+1 BMBF001    458 Day       
+2 BMBF001    396 Night     
+3 BMBF033    430 Day       
+4 BMBF033    132 Night     
+5 BMBF078    752 Day       
+6 BMBF078    436 Night     
+7 Carp-017  1612 Day       
+8 Carp-017   344 Night     
+9 Carp-021   514 Day       
+10 Carp-021   136 Night     
+# ... with 20 more rows
+```
