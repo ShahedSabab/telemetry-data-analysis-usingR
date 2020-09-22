@@ -172,4 +172,4 @@ Analyzing the distribution of each species, the following insights can be found:
 South Basin can be a hot spot for Drum and Walleye. In Red River Channel Catfish and Bigmouth Buffalo species are frequently detected. There is a higher chance of getting Common Carp in the Narrows.
 
 # How to run:
-Please check the task.R file.
+Please check the task_script.R file.
