@@ -125,8 +125,13 @@ combined_table_sorted
 ![](daily_position.png?raw=true)
 
 ## 3. Fish Behaviour
-#### A. Investigate the distribution for each species analyzing the latitude
+#### A. Investigate the distribution for each species in certain areas by analyzing the latitude
 ```
+#Waterbody and the value is set as "Red River" if the receiver latitude is less than 50.4, 
+#if the latitude is in between 50.4 and 51.2 then the value is set as "South Basin", 
+#if the latitude value is in between 51.2 and 51.75 then the value is set as "Narrows",
+# fish with latitude value greater than 51.75 is set as "North Basin"
+
 fish_df %>% 
   mutate(Waterbody = case_when(
     ReceiverLat < 50.4 ~ "Red River",
@@ -157,3 +162,11 @@ fish_df %>%
 12 Walleye          North Basin   881        7
 13 Walleye          South Basin  1976       31
 ```
+Analyzing the distribution of each species, the following insights can be found:
+
+1. Bigmouth Buffalo can only be found in Red River.
+2. Channel Catfish can be found in Red River and South Basin, but this species is detected more in Red River.
+3. Common Carp can be found in Narrows, Red River, and South Basin while more in Narrows.
+4. Drum can be found in Narrows, North Basin, Red River, and South Basin, while more in South Basin.
+5. Walleye can be found in Narrows, North Basin, and South Basin while more in South Basin 
+South Basin can be a hot spot for Drum and Walleye. In Red River Channel Catfish and Bigmouth Buffalo species are frequently detected. There is a higher chance of getting Common Carp in the Narrows.
