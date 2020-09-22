@@ -119,5 +119,6 @@ combined_table_sorted
 ```
 #### B. Plot mean dailty positions for FishID-Wall-135:
 > selected_data <- subset(fish_mean_pos, FishID == "Wall-135")
+
 > ggplot(selected_data, aes(x = Mean_Lat, y = Mean_Long)) + geom_point()
-![](daily_positions.png?raw=true)
+![](daily_position.png?raw=true)
